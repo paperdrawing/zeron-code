@@ -12,7 +12,6 @@ class aclient(discord.Client):
 
     async def on_ready(self):
        await self.wait_unril_ready()
-       await client.change_presence(status=discord.Status.online, activity=discord.Game(str('\'제론아\'라고 불러주시면 언제든 대답하겠습니다.')))
        if not self.synced:
            await tree.sync()
            self.synced = True
