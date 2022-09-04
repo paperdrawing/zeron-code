@@ -12,6 +12,7 @@ class aclient(discord.Client):
 
     async def on_ready(self):
        await self.wait_unril_ready()
+       await client.change_presence(status=discord.Status.online, activity=discord.Game(str('\'제론아\'라고 불러주시면 언제든 대답하겠습니다.')))
        if not self.synced:
            await tree.sync()
            self.synced = True
@@ -20,24 +21,9 @@ class aclient(discord.Client):
 client = aclient()
 tree = app_commands.CommandTree(client)
 
-intents = discord.Intents.default()
-intents.message_content = True
-bot = commands.Bot(command_prefix='제론아 ', intents=intents)
-
-@bot.event
-async def on_ready():
-    await bot.change_presence(status=discord.Status.online, activity=discord.Game(str('\'제론아\'라고 불러주시면 언제든 대답하겠습니다.')))
-
 @tree.command(name = 'test', description = 'just test and ereers')
 async def self(interaction:discord.Interaction, name: str):
-    await (f'{name}님 테스트가 완료되었습니다.')
-
-@bot.command()
-async def 자기소개(ctx):
-    await ctx.send('저는 python의 discord.py패키지를 기반으로 만들어진 유틸리티 챗봇입니다.')
-    await ctx.typing()
-    await asyncio.sleep(5)
-    await ctx.send('...너무 자세하다고요?')
+    await interaction.response.send_message(f'{name}님 테스트가 완료되었습니다.')
 
 access_token = os.environ["BOT_TOKEN"]
-bot.run(access_token)
+client.run(access_token)
