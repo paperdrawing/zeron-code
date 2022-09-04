@@ -13,7 +13,7 @@ class aclient(discord.Client):
     async def on_ready(self):
        await self.wait_unril_ready()
        if not self.synced:
-           await tree.sync(guild = discord.Object(id = 1014461147816140870))
+           await tree.sync()
            self.synced = True
        print(f'{self.user}에 로그인 돼었습니다')
 
@@ -28,7 +28,7 @@ bot = commands.Bot(command_prefix='제론아 ', intents=intents)
 async def on_ready():
     await bot.change_presence(status=discord.Status.online, activity=discord.Game(str('\'제론아\'라고 불러주시면 언제든 대답하겠습니다.')))
 
-@tree.command(name = 'test', description = 'just test and !s', guild = discord.Object(id = 1014461147816140870))
+@tree.command(name = 'test', description = 'just test and ereers')
 async def self(interaction:discord.Interaction, name: str):
     await (f'{name}님 테스트가 완료되었습니다.')
 
