@@ -13,14 +13,14 @@ class aclient(discord.Client):
     async def on_ready(self):
        await self.wait_unril_ready()
        if not self.synced:
-           await tree.sync()
+           await tree.sync(guild=discord.Object(id=1013096945155321907))
            self.synced = True
        print(f'{self.user}에 로그인 돼었습니다')
 
 client = aclient()
 tree = app_commands.CommandTree(client)
 
-@tree.command(name = 'test', description = 'just test and ereers')
+@tree.command(name = 'test', description = 'just test and ereers', guild=discord.Object(id=1013096945155321907))
 async def self(interaction:discord.Interaction, name: str):
     await interaction.response.send_message(f'{name}님 테스트가 완료되었습니다.')
 
