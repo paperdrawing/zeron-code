@@ -11,7 +11,8 @@ class aclient(discord.Client):
         self.synced = False
 
     async def on_ready(self):
-       await self.wait_unril_ready()
+       await self.wait_until_ready()
+       await client.change_presence(status=discord.Status.online, activity=discord.Game(str('\'제론아\'라고 불러주시면 언제든 대답하겠습니다.')))
        if not self.synced:
            await tree.sync(guild=discord.Object(id=1013096945155321907))
            self.synced = True
@@ -20,7 +21,7 @@ class aclient(discord.Client):
 client = aclient()
 tree = app_commands.CommandTree(client)
 
-@tree.command(name = 'test', description = 'just test and ereers', guild=discord.Object(id=1013096945155321907))
+@tree.command(name = '테스트', description = '이름과 메시지를 출력합니다.', guild=discord.Object(id=1013096945155321907))
 async def self(interaction:discord.Interaction, name: str):
     await interaction.response.send_message(f'{name}님 테스트가 완료되었습니다.')
 
